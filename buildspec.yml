@@ -6,5 +6,5 @@ phases:
       - cfn_nag --input-json-path ./vpc.template
 artifacts:
   files:
-    - ./compliance_vpc.json
+    - ./vpc.template
   discard-paths: yes
