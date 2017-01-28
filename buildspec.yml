@@ -1,0 +1,10 @@
+version: 0.1
+
+phases:
+  build:
+    commands:
+      - cfn_nag --input-json-path ./compliance_vpc.json
+artifacts:
+  files:
+    - ./compliance_vpc.json
+  discard-paths: yes
