@@ -114,6 +114,7 @@
       }
     },
     "CodePipelineServiceRole" : {
+      "DependsOn": ["CodeBuildProject"],
       "Type": "AWS::IAM::Role",
       "Properties": {
         "AssumeRolePolicyDocument": {
@@ -135,12 +136,26 @@
               "Version": "2012-10-17",
               "Statement": [
                 {
+                  "Effect": "Allow",
                   "Action": [
                     "s3:GetObject",
-                    "s3:GetObjectVersion"
+                    "s3:GetObjectVersion",
+                    "s3:PutObject"
                   ],
-                  "Resource": "*",
-                  "Effect": "Allow"
+                  "Resource": [
+                    {"Fn::Join": ["", ["arn:aws:s3:::", { "Ref": "ArtifactRepo" }, "*"]]},
+                    {"Fn::Join": ["", ["arn:aws:s3:::", {"Fn::Join": ["/", [{ "Ref": "ArtifactRepo" }, "*"]] }]]}
+                  ]
+                },
+                {
+                  "Effect": "Allow",
+                  "Action": [
+                    "codebuild:BatchGetBuilds",
+                    "codebuild:StartBuild"
+                  ],
+                  "Resource": [
+                    { "Fn::GetAtt": [ "CodeBuildProject", "Arn" ] }
+                  ]
                 },
                 {
                   "Action": [
