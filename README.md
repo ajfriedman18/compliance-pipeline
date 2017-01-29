@@ -27,39 +27,26 @@ REPO_NAME='your repositoryName'
 REPO_URI='your repositoryUri'
 ```
 
-Retrieve the docker login command that you can use to authenticate your Docker client to your registry
+Retrieve and run the docker login command that you can use to authenticate your Docker client to your registry
 
 ```bash
-aws ecr get-login --region us-east-1
+eval $(aws ecr get-login --region us-east-1)
 ```
 
-Run the docker login command that was returned in the previous step
-
-Build your Docker image using the following command
+Build, tag, and push your Docker image using the following command
 
 ```bash
 docker build -t ${REPO_NAME} .
-```
-
-After the build completes, tag your image so you can push the image to this repository
-
-```bash
 docker tag ${REPO_NAME}:latest ${REPO_URI}:latest
-```
-
-Run the following command to push this image to your newly created AWS repository
-
-```bash
 docker push ${REPO_URI}:latest
 ```
 
-Edit vpc-pipeline.params and update the following values:
+Edit vpc-pipeline.params and update the following values. We will be using GitHub, so :
 
-- SourceOwner
-- SourceBranch
-- SourceRepo
-- SourceLocation
-- OAuthToken
+- SourceOwner: Your GitHub user name
+- SourceBranch: The branch we will be building (e.g. master)
+- SourceRepo: The name of your repo with your code
+- OAuthToken: Generated above
 - DockerImage
 
 The value for your Docker image can be retrieved using the following command:
@@ -67,6 +54,8 @@ The value for your Docker image can be retrieved using the following command:
 ```bash
 echo "${REPO_URI}:latest"
 ```
+
+You will also need to make sure that you have connected your GitHub account to AWS CodeBuild. You can find directions on this page: https://docs.aws.amazon.com/codebuild/latest/userguide/create-project.html
 
 Create the VpcPipeline Stack
 ```bash

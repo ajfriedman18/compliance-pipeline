@@ -1,0 +1,183 @@
+{
+  "AWSTemplateFormatVersion": "2010-09-09",
+  "Description": "CI/CD Pipeline for VPC Configuration",
+  "Resources": {
+    "BucketLogs": {
+      "Type": "AWS::S3::Bucket",
+      "Properties": { "AccessControl":  "LogDeliveryWrite"  }
+    },
+    "BucketPolicyLogs": {
+      "Type": "AWS::S3::BucketPolicy",
+      "Properties": {
+        "Bucket": {"Ref": "BucketLogs"},
+        "PolicyDocument": {
+          "Version": "2012-10-17",
+          "Id": "PutObjPolicy",
+          "Statement": [
+            {
+              "Sid": "DenyIncorrectEncryptionHeader",
+              "Effect": "Deny",
+              "Principal": "*",
+              "Action": "s3:PutObject",
+              "Resource": { "Fn::Join" : ["", ["arn:aws:s3:::", {"Ref": "BucketLogs"}, "/*"]]},
+              "Condition": {
+                "StringNotEquals": {
+                    "s3:x-amz-server-side-encryption": "AES256"
+                }
+
+              }
+            },
+            {
+              "Sid": "DenyUnencryptedObjectUploads",
+              "Effect": "Deny",
+              "Principal": "*",
+              "Action": "s3:PutObject",
+              "Resource": { "Fn::Join" : ["", ["arn:aws:s3:::", {"Ref": "BucketLogs"}, "/*"]]},
+              "Condition": {
+                "Null": {
+                    "s3:x-amz-server-side-encryption": "true"
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+    "BucketDataDev" : {
+      "Type": "AWS::S3::Bucket",
+      "Properties": {
+        "LoggingConfiguration": {
+          "DestinationBucketName": {"Ref": "BucketLogs"},
+          "LogFilePrefix": "s3-logs/data-dev/"
+        }
+      }
+    },
+    "BucketPolicyDataDev": {
+      "Type": "AWS::S3::BucketPolicy",
+      "Properties": {
+        "Bucket": {"Ref": "BucketDataDev"},
+        "PolicyDocument": {
+          "Version": "2012-10-17",
+          "Id": "PutObjPolicy",
+          "Statement": [
+            {
+              "Sid": "DenyIncorrectEncryptionHeader",
+              "Effect": "Deny",
+              "Principal": "*",
+              "Action": "s3:PutObject",
+              "Resource": { "Fn::Join" : ["", ["arn:aws:s3:::", {"Ref": "BucketDataDev"}, "/*"]]},
+              "Condition": {
+                "StringNotEquals": {
+                    "s3:x-amz-server-side-encryption": "AES256"
+                }
+              }
+            },
+            {
+              "Sid": "DenyUnencryptedObjectUploads",
+              "Effect": "Deny",
+              "Principal": "*",
+              "Action": "s3:PutObject",
+              "Resource": { "Fn::Join" : ["", ["arn:aws:s3:::", {"Ref": "BucketDataDev"}, "/*"]]},
+              "Condition": {
+                "Null": {
+                    "s3:x-amz-server-side-encryption": "true"
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+    "BucketDataTest" : {
+      "Type": "AWS::S3::Bucket",
+      "Properties": {
+        "LoggingConfiguration": {
+          "DestinationBucketName": {"Ref": "BucketLogs"},
+          "LogFilePrefix": "s3-logs/data-test/"
+        }
+      }
+    },
+    "BucketPolicyDataTest": {
+      "Type": "AWS::S3::BucketPolicy",
+      "Properties": {
+        "Bucket": {"Ref": "BucketDataTest"},
+        "PolicyDocument": {
+          "Version": "2012-10-17",
+          "Id": "PutObjPolicy",
+          "Statement": [
+            {
+              "Sid": "DenyIncorrectEncryptionHeader",
+              "Effect": "Deny",
+              "Principal": "*",
+              "Action": "s3:PutObject",
+              "Resource": { "Fn::Join" : ["", ["arn:aws:s3:::", {"Ref": "BucketDataTest"}, "/*"]]},
+              "Condition": {
+                "StringNotEquals": {
+                    "s3:x-amz-server-side-encryption": "AES256"
+                }
+              }
+            },
+            {
+              "Sid": "DenyUnencryptedObjectUploads",
+              "Effect": "Deny",
+              "Principal": "*",
+              "Action": "s3:PutObject",
+              "Resource": { "Fn::Join" : ["", ["arn:aws:s3:::", {"Ref": "BucketDataTest"}, "/*"]]},
+              "Condition": {
+                "Null": {
+                    "s3:x-amz-server-side-encryption": "true"
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+    "BucketDataProd" : {
+      "Type": "AWS::S3::Bucket",
+      "Properties": {
+        "LoggingConfiguration": {
+          "DestinationBucketName": {"Ref": "BucketLogs"},
+          "LogFilePrefix": "s3-logs/data-prod/"
+        }
+      }
+    },
+    "BucketPolicyDataProd": {
+      "Type": "AWS::S3::BucketPolicy",
+      "Properties": {
+        "Bucket": {"Ref": "BucketDataProd"},
+        "PolicyDocument": {
+          "Version": "2012-10-17",
+          "Id": "PutObjPolicy",
+          "Statement": [
+            {
+              "Sid": "DenyIncorrectEncryptionHeader",
+              "Effect": "Deny",
+              "Principal": "*",
+              "Action": "s3:PutObject",
+              "Resource": { "Fn::Join" : ["", ["arn:aws:s3:::", {"Ref": "BucketDataProd"}, "/*"]]},
+              "Condition": {
+                "StringNotEquals": {
+                    "s3:x-amz-server-side-encryption": "AES256"
+                }
+              }
+            },
+            {
+              "Sid": "DenyUnencryptedObjectUploads",
+              "Effect": "Deny",
+              "Principal": "*",
+              "Action": "s3:PutObject",
+              "Resource": { "Fn::Join" : ["", ["arn:aws:s3:::", {"Ref": "BucketDataProd"}, "/*"]]},
+              "Condition": {
+                "Null": {
+                    "s3:x-amz-server-side-encryption": "true"
+                }
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+}
+

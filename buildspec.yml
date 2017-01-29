@@ -3,8 +3,8 @@ version: 0.1
 phases:
   build:
     commands:
-      - cfn_nag --input-json-path ./vpc.template
+      - cfn_nag --input-json-path ./s3.template
 artifacts:
   files:
-    - ./vpc.template
+    - ./s3.template
   discard-paths: yes

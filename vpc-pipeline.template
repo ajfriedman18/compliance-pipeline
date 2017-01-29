@@ -211,7 +211,7 @@
         "Source": {
           "BuildSpec": "",
           "Type": "GITHUB",
-          "Location": { "Ref": "SourceLocation" },
+          "Location": { "Ref": "SourceLocation"},
           "Auth": {
             "Type": "OAUTH"
           }
