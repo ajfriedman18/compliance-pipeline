@@ -15,7 +15,7 @@
           "Id": "PutObjPolicy",
           "Statement": [
             {
-              "Sid": "DenyIncorrectEncryptionHeader",
+              "Sid": "DenyIncorrectEncryptionHeader Test",
               "Effect": "Deny",
               "Principal": "*",
               "Action": "s3:PutObject",
