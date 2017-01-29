@@ -53,7 +53,7 @@ Run the following command to push this image to your newly created AWS repositor
 docker push ${REPO_URI}:latest
 ```
 
-Edit vpc-pipeline.params and updated the following values:
+Edit vpc-pipeline.params and update the following values:
 
 - SourceOwner
 - SourceBranch
