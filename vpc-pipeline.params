@@ -1,0 +1,8 @@
+[
+  { "ParameterKey": "SourceOwner", "ParameterValue": "replaceme" },
+  { "ParameterKey": "SourceBranch", "ParameterValue": "replaceme" },
+  { "ParameterKey": "SourceRepo", "ParameterValue": "replaceme" },
+  { "ParameterKey": "SourceLocation", "ParameterValue": "replaceme" },
+  { "ParameterKey": "OAuthToken", "ParameterValue": "replaceme" },
+  { "ParameterKey": "DockerImage", "ParameterValue": "replaceme" }
+]
