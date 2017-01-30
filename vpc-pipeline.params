@@ -1,8 +1,8 @@
 [
-  { "ParameterKey": "SourceOwner", "ParameterValue": "ajfriedman18" },
-  { "ParameterKey": "SourceBranch", "ParameterValue": "master" },
-  { "ParameterKey": "SourceRepo", "ParameterValue": "compliance-pipeline" },
-  { "ParameterKey": "SourceLocation", "ParameterValue": "https://github.com/ajfriedman18/compliance-pipeline.git" },
+  { "ParameterKey": "SourceOwner", "ParameterValue": "replaceme" },
+  { "ParameterKey": "SourceBranch", "ParameterValue": "replaceme" },
+  { "ParameterKey": "SourceRepo", "ParameterValue": "replaceme" },
+  { "ParameterKey": "SourceLocation", "ParameterValue": "replaceme" },
   { "ParameterKey": "OAuthToken", "ParameterValue": "replaceme" },
-  { "ParameterKey": "DockerImage", "ParameterValue": "037062425811.dkr.ecr.us-east-1.amazonaws.com/compl-compl-11loa8yg0djy7:latest" }
+  { "ParameterKey": "DockerImage", "ParameterValue": "replaceme" }
 ]
